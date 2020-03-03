@@ -280,6 +280,13 @@ class _SlidePresentationState extends State<SlidePresentation>
               listTapAllowed = false;
             }
             break;
+          case RawKeyEventDataLinux:
+            final RawKeyEventDataLinux data = event.data;
+            upKeyCode = data.keyCode;
+            if (upKeyCode == _lisTapKeycode) {
+              listTapAllowed = false;
+            }
+            break;
           default:
             throw new Exception('Unsupported platform');
         }
@@ -293,23 +300,33 @@ class _SlidePresentationState extends State<SlidePresentation>
       case RawKeyEventDataMacOs:
         final RawKeyEventDataMacOs data = event.data;
         keyCode = data.keyCode;
-        if (keyCode == 33) {
-          _slideListController?.reverse();
-        } else if (keyCode == 49) {
-          _advancePresentation(model);
-        } else if (keyCode == 30) {
-          _slideListController?.forward();
-        } else if (keyCode == 123) {
-          // tapped left
-          _reversePresentation(model);
-        } else if (keyCode == 124) {
-          _advancePresentation(model);
-        } else if (keyCode == _lisTapKeycode) {
-          listTapAllowed = true;
-        }
+        _handleKeyCode(keyCode, model);
+        break;
+      case RawKeyEventDataLinux:
+        final RawKeyEventDataLinux data = event.data;
+        keyCode = data.keyCode;
+        _handleKeyCode(keyCode, model);
         break;
       default:
         throw new Exception('Unsupported platform');
+    }
+  }
+
+  void _handleKeyCode(int keyCode, FlutterSlidesModel model) {
+    print(keyCode);
+    if (keyCode == 33 || keyCode == 91) {
+      _slideListController?.reverse();
+    } else if (keyCode == 49 || keyCode == 32) {
+      _advancePresentation(model);
+    } else if (keyCode == 30 || keyCode == 93) {
+      _slideListController?.forward();
+    } else if (keyCode == 123 || keyCode == 263) {
+      // tapped left
+      _reversePresentation(model);
+    } else if (keyCode == 124 || keyCode == 262) {
+      _advancePresentation(model);
+    } else if (keyCode == _lisTapKeycode) {
+      listTapAllowed = true;
     }
   }
 

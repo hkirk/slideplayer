@@ -18,23 +18,19 @@ dependencies:
 
   # Desktop embedder plugins.
   file_chooser:
-    git:
-      url: git://github.com/google/flutter-desktop-embedding.git
-      ref: 403355819d784ab51af55e5de556de03618996ba
-      path: plugins/file_chooser
+    path: ../../flutter-desktop-embedding/plugins/file_chooser
   menubar:
-    git:
-      url: git://github.com/google/flutter-desktop-embedding.git
-      ref: 403355819d784ab51af55e5de556de03618996ba
-      path: plugins/menubar
-  shared_preferences_fde:
-    git:
-      url: git://github.com/google/flutter-desktop-embedding.git
-      ref: 403355819d784ab51af55e5de556de03618996ba
-      path: plugins/flutter_plugins/shared_preferences_fde
+    path: ../../flutter-desktop-embedding/plugins/menubar
+  # shared_preferences_fde:
+  #   path: ../../flutter-desktop-embedding/plugins/flutter_plugins/shared_preferences_fde
+    # git:
+    #   url: git://github.com/google/flutter-desktop-embedding.git
+    #   ref: 403355819d784ab51af55e5de556de03618996ba
+    #   path: plugins/flutter_plugins/shared_preferences_fde
+
 
   # Flutter plugins
-  shared_preferences: ^0.5.3+4
+  shared_preferences: ^0.5.6
 
 dev_dependencies:
   flutter_test:

@@ -15,12 +15,16 @@ FlutterSlidesModel loadedSlides = FlutterSlidesModel();
 
 const _RECENTLY_OPENED_FILE_PREFS_KEY = 'last_opened_file_path';
 
-void loadSlideDataFromFileChooser() {
-  file_chooser.showOpenPanel((result, paths) {
-    if (paths != null) {
-      _loadSlidesData(paths.first);
-    }
-  }, allowsMultipleSelection: false);
+void loadSlideDataFromFileChooser() async {
+  final result =
+      await file_chooser.showOpenPanel(allowsMultipleSelection: false);
+  _loadSlidesData(result.paths.first);
+
+  // file_chooser.showOpenPanel((result, paths) {
+  //   if (paths != null) {
+  //     _loadSlidesData(paths.first);
+  //   }
+  // }, allowsMultipleSelection: false);
 }
 
 void loadRecentlyOpenedSlideData() {
@@ -128,9 +132,10 @@ class FlutterSlidesModel extends Model {
       }
       loadedSlides.slides = slideList;
       loadedSlides.notifyListeners();
-      SharedPreferences.getInstance().then((prefs) {
-        prefs.setString(_RECENTLY_OPENED_FILE_PREFS_KEY, filePath);
-      });
+      // TODO save something in shared prefs
+      // SharedPreferences.getInstance().then((prefs) {
+      //   prefs.setString(_RECENTLY_OPENED_FILE_PREFS_KEY, filePath);
+      // });
     } catch (e) {
       print("Error loading slides file: $e");
     }
